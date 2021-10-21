@@ -1,3 +1,5 @@
+import { Home } from './pages/Home/Home';
+
 import './global.scss';
 
-export const App = () => <h2> test app</h2>;
+export const App = () => <Home />;
