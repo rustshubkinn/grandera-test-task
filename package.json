@@ -117,6 +117,7 @@
       "react/jsx-uses-react": 0,
       "import/prefer-default-export": 0,
       "import/no-default-export": 2,
+      "react/jsx-props-no-spreading": 0,
       "react/function-component-definition": [
         2,
         {
