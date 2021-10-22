@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import { Loader } from 'components/Loader/Loader';
 import { DeleteBtn } from 'components/DeleteBtn/DeleteBtn';
@@ -24,14 +25,16 @@ export const Home = () => {
         Header: '',
         id: 'link',
         width: 100,
-        Cell: (formAPI) => {
-          const { row } = formAPI;
+        Cell: (tableAPI) => {
+          const { row } = tableAPI;
           return (
-            <a
-              href={`https://jsonplaceholder.typicode.com/users/${row.original.id}`}
+            <Link
+              to={{
+                pathname: `/users/${row.original.id}`,
+              }}
             >
               Подробнее
-            </a>
+            </Link>
           );
         },
       },

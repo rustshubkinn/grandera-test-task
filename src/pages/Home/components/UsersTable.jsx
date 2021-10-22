@@ -1,27 +1,10 @@
-import { forwardRef, useEffect, useRef } from 'react';
 import { usePagination, useRowSelect, useSortBy, useTable } from 'react-table';
-import { arrayOf, bool, shape } from 'prop-types';
+import { arrayOf, shape } from 'prop-types';
+
+import { TableCheckbox } from 'components/TableCheckbox/TableCheckbox';
+import { PageBtn } from 'components/PageBtn/PageBtn';
 
 import classes from './UsersTable.module.scss';
-
-const IndeterminateCheckbox = forwardRef(({ indeterminate, ...rest }, ref) => {
-  const defaultRef = useRef();
-  const resolvedRef = ref || defaultRef;
-
-  useEffect(() => {
-    resolvedRef.current.indeterminate = indeterminate;
-  }, [resolvedRef, indeterminate]);
-
-  return (
-    <>
-      <input type="checkbox" ref={resolvedRef} {...rest} />
-    </>
-  );
-});
-
-IndeterminateCheckbox.propTypes = {
-  indeterminate: bool.isRequired,
-};
 
 export const UsersTable = ({ columns, data }) => {
   const {
@@ -49,14 +32,14 @@ export const UsersTable = ({ columns, data }) => {
           id: 'selection',
           width: 20,
           Header: '',
-          Cell: (formAPI) => {
-            const { row, selectedFlatRows } = formAPI;
+          Cell: (tableAPI) => {
+            const { row, selectedFlatRows } = tableAPI;
             const isDisabled =
               row.getToggleRowSelectedProps().checked &&
               selectedFlatRows.length === 1;
             return (
               <div>
-                <IndeterminateCheckbox
+                <TableCheckbox
                   disabled={isDisabled}
                   {...row.getToggleRowSelectedProps()}
                 />
@@ -124,20 +107,12 @@ export const UsersTable = ({ columns, data }) => {
         </tbody>
       </table>
       <div className={classes.pagination}>
-        <button
-          type="button"
-          onClick={() => previousPage()}
-          disabled={!canPreviousPage}
-        >
-          1
-        </button>
-        <button
-          type="button"
-          onClick={() => nextPage()}
-          disabled={!canNextPage}
-        >
-          2
-        </button>
+        <PageBtn onClick={previousPage} disabled={!canPreviousPage}>
+          ←
+        </PageBtn>
+        <PageBtn onClick={nextPage} disabled={!canNextPage}>
+          →
+        </PageBtn>
       </div>
     </>
   );
