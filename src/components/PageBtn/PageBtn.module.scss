@@ -1,0 +1,19 @@
+.pagination {
+  margin: 15px 0;
+
+  text-align: center;
+
+  button {
+    padding: 5px 10px;
+
+    font-size: 16px;
+
+    background-color: #cac1d5;
+    border: 0;
+    border-radius: 7px;
+
+    &:not(:last-child) {
+      margin-right: 5px;
+    }
+  }
+}
